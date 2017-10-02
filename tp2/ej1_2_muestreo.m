@@ -1,3 +1,4 @@
+% secuencia para obtener 100000 muestras de la funcion del punto 2.
 z=zeros(1,100000);
 mu=0;
 sigma2=1;

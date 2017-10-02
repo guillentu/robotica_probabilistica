@@ -5,7 +5,7 @@ function [err x_pos]=ej2_1_modeloOdometria(x,u,alpha)
   u_pos=[];
   u_pos(1)=u(1) + boxMuller(0,alpha(1)*abs(u(1))+alpha(2)*abs(u(3)));
   u_pos(2)=u(2) + boxMuller(0,alpha(1)*abs(u(2))+alpha(2)*abs(u(3)));
-  u_pos(3)=u(3) + boxMuller(alpha(3)*abs(u(3))+alpha(4)*(abs(u(1))+abs(u(2))),.01);
+  u_pos(3)=u(3) + boxMuller(0,alpha(3)*abs(u(3))+alpha(4)*(abs(u(1))+abs(u(2))));
   
   x_pos=[];
   x_pos(1)=x(1)+u_pos(3)*cos(x(3)+u_pos(1));

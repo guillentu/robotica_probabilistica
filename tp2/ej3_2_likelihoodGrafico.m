@@ -20,7 +20,7 @@ for i=1:length(sedes(1,:))
   endfor
 endfor
 
-nu= sum(sum(prob_x,1))
+%nu= sum(sum(prob_x,1))
 %prob_x=prob_x./nu
 figure;hold on;
 mesh(sedes(1,[end:-1:1]),sedes(2,end:-1:1),prob_mapa)
