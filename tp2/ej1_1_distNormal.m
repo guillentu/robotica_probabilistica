@@ -1,4 +1,4 @@
-function ej1_1_distNormal(u,b)
+function muestras=ej1_1_distNormal(u,b)
   % muestas  de una distribucion normal 
   %          desvio|                 Eza de va|   | media
   muestras=(rand(12,100000)-.5);
