@@ -27,14 +27,15 @@ delta_d=[abs(d_pos(1,:)-d(1)); abs(d_pos(2,:)-d(2))];
 %          T1x0 T1x1
 % Probabilidad  P(d0^d1|sedePC)=P(d0|PC)*P(d1|PC)
 %                                | => 1-P(X<delta_d)+P(X< -delta_d)
-prob_x=[(1-normcdf(delta_d(1,1),0,sigma_z(1))+normcdf(-delta_d(1,1),0,sigma_z(1)))* ...
+likelihood=[(1-normcdf(delta_d(1,1),0,sigma_z(1))+normcdf(-delta_d(1,1),0,sigma_z(1)))* ...
         (1-normcdf(delta_d(2,1),0,sigma_z(2))+normcdf(-delta_d(2,1),0,sigma_z(2)));
         (1-normcdf(delta_d(1,2),0,sigma_z(1))+normcdf(-delta_d(1,2),0,sigma_z(1)))*...
         (1-normcdf(delta_d(2,2),0,sigma_z(2))+normcdf(-delta_d(2,2),0,sigma_z(2)))
         ];
-%prob_x=prob_x(:,1).*prob_x(:,2)  
-nu= sum(prob_x)
-prob_x=prob_x./nu
+prior=[0.5;0.5];
+
+nu= sum(likelihood.*prior);
+prob_x=(likelihood.*prior)./nu
 %prob_x =
 %T0       0.944 = T0
 %T1       0.054 = T1
