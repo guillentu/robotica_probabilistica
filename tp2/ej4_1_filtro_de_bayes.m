@@ -15,8 +15,14 @@ u=[u;[zeros(1,length(belif)-1) 1]];
 
 figure;hold on;
 plot(belif,'*r');
-for i=1:15
+for i=1:10
   belif=sum(u.*belif,1)'; % Se aplica un comando de accion
+  plot(belif);
+endfor
+figure;hold on;
+plot(belif,'*r');
+for i=1:3
+  belif=sum(flip(flip(u,2),1).*belif,1)'; % Se aplica un comando de accion
   plot(belif);
 endfor
 
