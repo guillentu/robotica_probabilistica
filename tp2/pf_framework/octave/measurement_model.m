@@ -16,23 +16,18 @@ function weight = measurement_model(z, x, l)
     for i = 1:size(z, 2)
         landmark_position = [l(z(i).id).x, l(z(i).id).y];
         measurement_range = [z(i).range];
-
         %% TODO: compute weight
         %%%% Esto es proporsional a P(Zt | Xt_i
         sigma_z=[0.2];
         % Distancias de las antenas a cada sede (Heras; P. Colon)
-        d_pos=[];
-        d_pos=[sqrt((x(1,1)-m(1))**2+(x(2,1)-m(2))**2);  ... % distancia T0-PC
-         sqrt((x(1,2)-m(1))**2+(x(2,2)-m(2))**2) ... % distancia T1-PC
-         ];
-        delta_d=[abs(d_pos(1)-z(1)); abs(d_pos(2)-z(2))];% delta_d = T0x0 T0x1 ...
-  %                                                                       T1x0 T1x1 ...
-  % Probabilidad  P(d0^d1|sedePC)=P(d0|PC)*P(d1|PC)
-  %                                | => 1-P(X<delta_d)+P(X< -delta_d)
-  prob_x=[(1-normcdf(delta_d(1),0,sigma_z(1))+normcdf(-delta_d(1),0,sigma_z(1)))* ...
-          (1-normcdf(delta_d(2),0,sigma_z(1))+normcdf(-delta_d(2),0,sigma_z(1)))];
-        
+        d_pos2l=[];
+        d_pos2l=[sqrt((x(:,1)-landmark_position(1)).**2+(x(:,2)-landmark_position(2)).**2)];
+        delta_d=[abs(d_pos2l(:)-measurement_range)];% delta_d = T0x0 T0x1 ...
+        % Probabilidad  P(d0^d1|particula)=P(d0|particula1)*P(d1|particula1)...
+        %                                 | => 1-P(X<delta_d)+P(X< -delta_d)
+        prob_x=[(1-normcdf(delta_d(:),0,sigma_z(1))+normcdf(-delta_d(:),0,sigma_z(1)))];
+        weight=weight.*prob_x
     endfor
-
+  
     weight = weight ./ size(z, 2);
 end
