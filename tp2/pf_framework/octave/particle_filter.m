@@ -1,5 +1,6 @@
 % Make librobotics available
 addpath('librobotics');
+addpath('../../');
 
 % Read world data, i.e. landmarks
 printf("Reading world data ...");fflush(stdout);
