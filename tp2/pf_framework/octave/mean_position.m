@@ -8,4 +8,5 @@ function mean_pos = mean_position(particles, weights)
     mean_pos = zeros(1,3);
 
     %% TODO: compute mean_pos    
+    mean_pos=mean(particles,1);
 end

@@ -13,8 +13,9 @@ printf(" done\n");fflush(stdout);
 
 % Initialize particles
 particles = initialize_particles(500);
+a=0;
 
-for t = 1:50 %size(data.timestep, 2)
+for t = 1:size(data.timestep, 2)
     printf(".");fflush(stdout);
 
     new_particles = sample_motion_model(data.timestep(t).odometry, particles);
@@ -22,9 +23,11 @@ for t = 1:50 %size(data.timestep, 2)
     weights = measurement_model(data.timestep(t).sensor, new_particles, landmarks);
     normalizer = sum(weights);
     weights = weights ./ normalizer;
-
-    plot_state(new_particles, weights, landmarks, t);
-    
+    a++;
+    if (a==40)||(t<15)||(t==330)
+      plot_state(new_particles, weights, landmarks, t);
+      a=0;
+    endif
     particles = resample(new_particles, weights);
 endfor
 

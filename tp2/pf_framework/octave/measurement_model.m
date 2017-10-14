@@ -26,7 +26,7 @@ function weight = measurement_model(z, x, l)
         % Probabilidad  P(d0^d1|particula)=P(d0|particula1)*P(d1|particula1)...
         %                                 | => 1-P(X<delta_d)+P(X< -delta_d)
         prob_x=[(1-normcdf(delta_d(:),0,sigma_z(1))+normcdf(-delta_d(:),0,sigma_z(1)))];
-        weight=weight.*prob_x
+        weight=weight.*prob_x;
     endfor
   
     weight = weight ./ size(z, 2);
