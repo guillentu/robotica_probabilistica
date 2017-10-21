@@ -30,11 +30,13 @@ function [mu, sigma] = correction_step(mu, sigma, z, l)
                    % -(1+((l(i).y-mu(2))/(l(i).x-mu(1)))^2)^(-1) * ((l(i).y-mu(2))/(l(i).x-mu(1))^2)   -(1+((l(i).y-mu(2))/(l(i).x-mu(1)))^2)^(-1) * 1/(l(i).x-mu(1))  -1];
         Z(i) = z(i).range;
     end
-
+    size(H)
+    size(Z)
     R = diag(repmat([0.5], size(z, 2), 1));
     %dbstop('line')
     S=H*sigma*H'+R;
     K =  sigma*H'*inv(S); % Todo: Implement
+    size(K)
     mu = mu+K*(Z-expected_ranges)% Todo: Implement
     sigma = (eye(3)-K*H)*sigma; % Todo: Implement
 end
