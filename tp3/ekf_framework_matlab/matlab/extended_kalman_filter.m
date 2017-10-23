@@ -36,7 +36,9 @@ for t = 1:size(data.timestep, 2)
 
     % Perform the correction step of the EKF
     [mu, sigma] = correction_step(mu, sigma, data.timestep(t).sensor, landmarks);
-
+    
+    aux=data.timestep(t).sensor.id
+    data.timestep(t).sensor(aux).range
     % Generate visualization plots of the current state of the filter
     plot_state(mu, sigma, landmarks, t);
 end
