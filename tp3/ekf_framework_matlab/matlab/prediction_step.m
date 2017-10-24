@@ -16,19 +16,19 @@ function [mu, sigma] = prediction_step(mu, sigma, u)
 %     x_pos(1)=mu(1)+u(3)*cos(mu(3)+u(1));
 %     x_pos(2)=mu(2)+u(3)*sin(mu(3)+u(1));
 %     x_pos(3)=mu(3)+u(1)+u(2);  
-    mu=x_pos';
+    
     % Compute the Jacobian of g with respect to the state
     G = [ 1 0 -u.t*sin(mu(3)+u.r1);
           0 1  u.t*cos(mu(3)+u.r1);
           0 0         1            ];
-    Vt = [ cos(mu(3)+u.r1) -u.t*sin(mu(3)+u.r1) 0;
-           sin(mu(3)+u.r1)  u.t*sin(mu(3)+u.r1) 0;
-                 0                  0            1];
+%    Vt = [ cos(mu(3)+u.r1) -u.t*sin(mu(3)+u.r1) 0;
+%           sin(mu(3)+u.r1)  u.t*sin(mu(3)+u.r1) 0;
+%                 0                  0            1];
         
     % Motion noise
     Q = [0.2, 0, 0; 
         0, 0.2, 0; 
         0, 0, 0.02];
-
-    sigma = G*sigma*G' + Vt*Q*Vt';
+    mu=x_pos'
+    sigma = G*sigma*G' + Q;% + Vt*Q*Vt';
 end
