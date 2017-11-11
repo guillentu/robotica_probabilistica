@@ -49,19 +49,16 @@ showGui = false; % plot to files instead
 
 % Perform filter update for each odometry-observation pair read from the
 % data file.
-%for t = 1:size(data.timestep, 2)
-for t = 1:50
+for t = 1:size(data.timestep, 2)
+%for t = 1:50
     fprintf('timestep = %d\n', t);
 
     % Perform the prediction step of the particle filter
     particles = prediction_step(particles, data.timestep(t).odometry, noise);
-
     % Perform the correction step of the particle filter
     particles = correction_step(particles, data.timestep(t).sensor);
-
     % Generate visualization plots of the current state of the filter
     plot_state(particles, landmarks, t, data.timestep(t).sensor, showGui);
-
     % Resample the particle set
     particles = resample(particles);
 end
